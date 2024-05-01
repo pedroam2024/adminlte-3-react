@@ -1,7 +1,24 @@
 import { ContentHeader } from '@components';
+import {Tweet} from 'react-tweet';
+import YouTube, { YouTubeProps } from 'react-youtube';
+import ReactWhatsapp from 'react-whatsapp';
 
 const Blank = () => {
+  const onPlayerReady: YouTubeProps['onReady'] = (event) => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
+  }
+  const opts: YouTubeProps['opts'] = {
+    height: '390',
+    width: '640',
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  }
+  
   return (
+    
     <div>
       <ContentHeader title="Blank Page" />
       <section className="content">
@@ -32,6 +49,14 @@ const Blank = () => {
             </div>
             <div className="card-body">
               Start creating your amazing application!
+              <div>
+                <div>
+                  <Tweet id='1686744728795017216' />
+                </div>  
+                <div>
+                <YouTube videoId="2g811Eo7K8U" opts={opts} onReady={onPlayerReady} />
+                </div>
+              </div>          
             </div>
             <div className="card-footer">Footer</div>
           </div>
@@ -40,5 +65,4 @@ const Blank = () => {
     </div>
   );
 };
-
 export default Blank;
